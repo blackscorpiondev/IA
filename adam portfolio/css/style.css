@@ -1,0 +1,438 @@
+/* ============================================
+   RESET & BASE STYLES
+   ============================================ */
+
+/* Sélecteur universel pour réinitialiser tous les éléments */
+* {
+    margin: 0; /* Supprime toutes les marges par défaut */
+    padding: 0; /* Supprime tous les paddings par défaut */
+    box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur/hauteur totale */
+}
+
+/* Styles pour l'élément racine HTML */
+html {
+    scroll-behavior: smooth; /* Active le défilement fluide lors des clics sur les ancres */
+}
+
+/* Styles pour le corps du document */
+body {
+    /* Liste de polices de caractères avec fallback vers les polices système */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased; /* Améliore le rendu des polices sur WebKit (Safari, Chrome) */
+    -moz-osx-font-smoothing: grayscale; /* Améliore le rendu des polices sur Firefox macOS */
+    line-height: 1.6; /* Hauteur de ligne pour améliorer la lisibilité */
+    color: #1a1a1a; /* Couleur de texte principale (gris très foncé) */
+    background-color: #ffffff; /* Couleur de fond blanche */
+}
+
+/* ============================================
+   VARIABLES CSS (Couleurs & Espacements)
+   ============================================ */
+
+/* Définition des variables CSS personnalisées dans :root pour utilisation globale */
+:root {
+    /* Couleurs principales */
+    --color-foreground: #ffffff; /* Couleur de texte principale (blanc) */
+    --color-primary: #3b82f6; /* Couleur primaire (bleu) */
+    --color-muted-foreground: #9ca3af; /* Couleur de texte secondaire (gris) */
+    --color-background: #000000; /* Couleur de fond (noir) */
+    
+    /* Gradient Hero */
+    --gradient-hero-start: rgba(0, 0, 0, 0.6); /* Début du gradient (noir semi-transparent 60%) */
+    --gradient-hero-end: rgba(0, 0, 0, 0.8); /* Fin du gradient (noir semi-transparent 80%) */
+    
+    /* Bouton Hero */
+    --btn-hero-bg: #3b82f6; /* Couleur de fond du bouton hero (bleu) */
+    --btn-hero-hover: #2563eb; /* Couleur de fond au survol (bleu plus foncé) */
+    --btn-hero-text: #ffffff; /* Couleur du texte du bouton (blanc) */
+    
+    /* Espacements */
+    --spacing-xs: 0.5rem; /* Espacement très petit (8px) */
+    --spacing-sm: 1rem; /* Espacement petit (16px) */
+    --spacing-md: 1.5rem; /* Espacement moyen (24px) */
+    --spacing-lg: 2rem; /* Espacement grand (32px) */
+    --spacing-xl: 3rem; /* Espacement très grand (48px) */
+    
+    /* Tailles de conteneur */
+    --container-max-width: 1280px; /* Largeur maximale du conteneur principal */
+    --content-max-width: 56rem; /* Largeur maximale du contenu (équivalent à max-w-4xl = 56rem) */
+}
+
+/* ============================================
+   PAGE HERO (index.html)
+   ============================================ */
+
+/* Conteneur principal de la section hero */
+.hero-main {
+    position: relative; /* Position relative pour permettre le positionnement absolu des enfants */
+    min-height: 100vh; /* Hauteur minimale de 100% de la hauteur de la fenêtre */
+    display: flex; /* Active le modèle de boîte flexible */
+    align-items: center; /* Centre verticalement les éléments flex */
+    justify-content: center; /* Centre horizontalement les éléments flex */
+    overflow: hidden; /* Cache le contenu qui dépasse les limites */
+}
+
+/* Background avec image */
+.hero-background {
+    position: absolute; /* Position absolue pour placer l'élément par rapport au parent relatif */
+    inset: 0; /* Raccourci pour top: 0, right: 0, bottom: 0, left: 0 */
+    z-index: 0; /* Place l'élément en arrière-plan (niveau zéro) */
+    background-image: url('../assets/hero-bg.jpg'); /* Chemin vers l'image de fond */
+    background-size: cover; /* L'image couvre tout l'espace disponible */
+    background-position: center; /* Centre l'image de fond */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+}
+
+/* Overlay avec gradient et blur */
+.hero-overlay {
+    position: absolute; /* Position absolue pour superposer l'élément */
+    inset: 0; /* Raccourci pour couvrir tout l'espace du parent */
+    /* Gradient linéaire du haut vers le bas avec les couleurs définies dans les variables */
+    background: linear-gradient(
+        to bottom, /* Direction du gradient (vers le bas) */
+        var(--gradient-hero-start), /* Couleur de début du gradient */
+        var(--gradient-hero-end) /* Couleur de fin du gradient */
+    );
+    backdrop-filter: blur(4px); /* Applique un flou de 4px à l'arrière-plan (effet glassmorphism) */
+    -webkit-backdrop-filter: blur(4px); /* Préfixe WebKit pour la compatibilité Safari/Chrome */
+}
+
+/* Contenu Hero */
+.hero-content {
+    position: relative; /* Position relative pour placer l'élément au-dessus du background */
+    z-index: 10; /* Place l'élément au-dessus du background (niveau z supérieur) */
+    width: 100%; /* Largeur de 100% du conteneur parent */
+    max-width: var(--container-max-width); /* Largeur maximale définie dans les variables */
+    margin: 0 auto; /* Centre horizontalement le conteneur */
+    padding: 5rem 1rem; /* Padding vertical de 5rem et horizontal de 1rem */
+}
+
+.hero-container {
+    max-width: var(--content-max-width); /* Largeur maximale du contenu */
+    margin: 0 auto; /* Centre horizontalement le conteneur */
+    text-align: center; /* Centre le texte horizontalement */
+    display: flex; /* Active le modèle de boîte flexible */
+    flex-direction: column; /* Organise les éléments en colonne (vertical) */
+    gap: 2rem; /* Espacement de 2rem entre les éléments flex */
+}
+
+/* Titre principal */
+.hero-title {
+    font-size: 3rem; /* Taille de police de 3rem (équivalent à text-5xl) */
+    font-weight: 700; /* Poids de police gras */
+    color: var(--color-foreground); /* Couleur du texte (blanc) */
+    line-height: 1.1; /* Hauteur de ligne serrée pour les grands titres */
+}
+
+/* Sous-titre */
+.hero-subtitle {
+    font-size: 1.5rem; /* Taille de police de 1.5rem (équivalent à text-2xl) */
+    color: var(--color-primary); /* Couleur du texte (bleu primaire) */
+    font-weight: 600; /* Poids de police semi-gras */
+}
+
+/* Description */
+.hero-description {
+    font-size: 1.125rem; /* Taille de police de 1.125rem (équivalent à text-lg) */
+    color: var(--color-muted-foreground); /* Couleur du texte (gris) */
+    max-width: 42rem; /* Largeur maximale (équivalent à max-w-2xl) */
+    margin: 0 auto; /* Centre horizontalement le paragraphe */
+    line-height: 1.75; /* Hauteur de ligne plus large pour améliorer la lisibilité */
+}
+
+/* CTA Button */
+.hero-cta {
+    padding-top: 1rem; /* Padding supérieur de 1rem pour espacer le bouton */
+}
+
+.btn-hero {
+    display: inline-block; /* Affiche comme un bloc en ligne pour permettre le padding */
+    font-size: 1.125rem; /* Taille de police de 1.125rem (équivalent à text-lg) */
+    font-weight: 500; /* Poids de police moyen */
+    padding: 1.5rem 2rem; /* Padding vertical de 1.5rem et horizontal de 2rem (équivalent à py-6 px-8) */
+    background-color: var(--btn-hero-bg); /* Couleur de fond du bouton (bleu) */
+    color: var(--btn-hero-text); /* Couleur du texte (blanc) */
+    text-decoration: none; /* Supprime le soulignement du lien */
+    border-radius: 0.5rem; /* Coins arrondis de 0.5rem */
+    transition: all 0.3s ease; /* Transition fluide de 0.3s pour toutes les propriétés */
+    cursor: pointer; /* Change le curseur en pointeur au survol */
+    border: none; /* Supprime la bordure par défaut */
+    /* Ombre portée avec deux couches pour un effet de profondeur */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* État au survol du bouton hero */
+.btn-hero:hover {
+    background-color: var(--btn-hero-hover); /* Change la couleur de fond au survol (bleu plus foncé) */
+    transform: translateY(-2px); /* Déplace le bouton de 2px vers le haut */
+    /* Ombre portée plus prononcée au survol */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* État actif (clic) du bouton hero */
+.btn-hero:active {
+    transform: translateY(0); /* Remet le bouton à sa position initiale lors du clic */
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+/* Animation fade-in-up : apparition depuis le bas */
+@keyframes fade-in-up {
+    from { /* État initial de l'animation */
+        opacity: 0; /* Opacité à 0 (invisible) */
+        transform: translateY(20px); /* Position décalée de 20px vers le bas */
+    }
+    to { /* État final de l'animation */
+        opacity: 1; /* Opacité à 1 (visible) */
+        transform: translateY(0); /* Position normale (pas de décalage) */
+    }
+}
+
+/* Animation fade-in-delay : apparition depuis le bas avec délai */
+@keyframes fade-in-delay {
+    from { /* État initial de l'animation */
+        opacity: 0; /* Opacité à 0 (invisible) */
+        transform: translateY(15px); /* Position décalée de 15px vers le bas */
+    }
+    to { /* État final de l'animation */
+        opacity: 1; /* Opacité à 1 (visible) */
+        transform: translateY(0); /* Position normale (pas de décalage) */
+    }
+}
+
+/* Classe pour appliquer l'animation fade-in-up */
+.animate-fade-in-up {
+    animation: fade-in-up 0.8s ease-out forwards; /* Applique l'animation fade-in-up pendant 0.8s avec easing ease-out et garde l'état final */
+    opacity: 0; /* Opacité initiale à 0 pour que l'animation fonctionne */
+}
+
+/* Classe pour appliquer l'animation fade-in-delay */
+.animate-fade-in-delay {
+    animation: fade-in-delay 0.8s ease-out 0.3s forwards; /* Applique l'animation fade-in-delay pendant 0.8s avec un délai de 0.3s, easing ease-out et garde l'état final */
+    opacity: 0; /* Opacité initiale à 0 pour que l'animation fonctionne */
+}
+
+/* ============================================
+   PAGE PROJETS (mes-projets.html)
+   ============================================ */
+
+/* En-tête de la page des projets */
+.projects-header {
+    background-color: #1a1a1a; /* Couleur de fond sombre */
+    padding: 1.5rem 0; /* Padding vertical de 1.5rem */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Bordure inférieure fine et semi-transparente */
+}
+
+/* Navigation dans l'en-tête */
+.projects-nav {
+    max-width: var(--container-max-width); /* Largeur maximale définie dans les variables */
+    margin: 0 auto; /* Centre horizontalement la navigation */
+    padding: 0 1rem; /* Padding horizontal de 1rem */
+}
+
+/* Lien de navigation */
+.nav-link {
+    color: var(--color-foreground); /* Couleur du texte (blanc) */
+    text-decoration: none; /* Supprime le soulignement du lien */
+    font-size: 1rem; /* Taille de police de 1rem */
+    transition: color 0.3s ease; /* Transition fluide de 0.3s pour la couleur */
+}
+
+/* État au survol du lien de navigation */
+.nav-link:hover {
+    color: var(--color-primary); /* Change la couleur au survol (bleu primaire) */
+}
+
+/* Contenu principal de la page des projets */
+.projects-main {
+    min-height: calc(100vh - 200px); /* Hauteur minimale de 100vh moins 200px pour le header/footer */
+    background: linear-gradient(to bottom, #0f0f0f, #1a1a1a); /* Gradient de fond du noir très foncé au noir foncé */
+    padding: 4rem 0; /* Padding vertical de 4rem */
+}
+
+/* Conteneur des projets */
+.projects-container {
+    max-width: var(--container-max-width); /* Largeur maximale définie dans les variables */
+    margin: 0 auto; /* Centre horizontalement le conteneur */
+    padding: 0 1rem; /* Padding horizontal de 1rem */
+}
+
+/* Titre de la page des projets */
+.projects-title {
+    font-size: 3rem; /* Taille de police de 3rem */
+    font-weight: 700; /* Poids de police gras */
+    color: var(--color-foreground); /* Couleur du texte (blanc) */
+    text-align: center; /* Centre le texte horizontalement */
+    margin-bottom: 3rem; /* Marge inférieure de 3rem */
+}
+
+/* Grille de projets */
+.projects-grid {
+    display: grid; /* Active le modèle de grille CSS */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Colonnes automatiques avec largeur minimale de 300px */
+    gap: 2rem; /* Espacement de 2rem entre les éléments de la grille */
+    margin-top: 2rem; /* Marge supérieure de 2rem */
+}
+
+/* Carte de projet */
+.project-card {
+    background-color: #1f1f1f; /* Couleur de fond sombre pour la carte */
+    border-radius: 0.75rem; /* Coins arrondis de 0.75rem */
+    overflow: hidden; /* Cache le contenu qui dépasse les limites (pour les images) */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transition fluide pour la transformation et l'ombre */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3); /* Ombre portée pour donner de la profondeur */
+}
+
+/* État au survol de la carte de projet */
+.project-card:hover {
+    transform: translateY(-8px); /* Déplace la carte de 8px vers le haut au survol */
+    /* Ombre portée plus prononcée au survol */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+/* Conteneur de l'image du projet */
+.project-image {
+    width: 100%; /* Largeur de 100% du conteneur parent */
+    height: 250px; /* Hauteur fixe de 250px */
+    overflow: hidden; /* Cache le contenu qui dépasse les limites */
+    background-color: #2a2a2a; /* Couleur de fond gris foncé (fallback si l'image ne charge pas) */
+}
+
+/* Image du projet */
+.project-image img {
+    width: 100%; /* Largeur de 100% du conteneur */
+    height: 100%; /* Hauteur de 100% du conteneur */
+    object-fit: cover; /* L'image couvre tout l'espace en conservant ses proportions */
+    transition: transform 0.3s ease; /* Transition fluide pour la transformation */
+}
+
+/* État au survol de l'image du projet */
+.project-card:hover .project-image img {
+    transform: scale(1.05); /* Agrandit l'image de 5% au survol de la carte */
+}
+
+/* Contenu textuel de la carte de projet */
+.project-content {
+    padding: 1.5rem; /* Padding de 1.5rem de tous les côtés */
+}
+
+/* Titre du projet */
+.project-title {
+    font-size: 1.5rem; /* Taille de police de 1.5rem */
+    font-weight: 600; /* Poids de police semi-gras */
+    color: var(--color-foreground); /* Couleur du texte (blanc) */
+    margin-bottom: 0.75rem; /* Marge inférieure de 0.75rem */
+}
+
+/* Description du projet */
+.project-description {
+    font-size: 0.95rem; /* Taille de police de 0.95rem */
+    color: var(--color-muted-foreground); /* Couleur du texte (gris) */
+    line-height: 1.6; /* Hauteur de ligne pour améliorer la lisibilité */
+}
+
+/* Pied de page de la page des projets */
+.projects-footer {
+    background-color: #0f0f0f; /* Couleur de fond très sombre */
+    padding: 2rem 0; /* Padding vertical de 2rem */
+    text-align: center; /* Centre le texte horizontalement */
+    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Bordure supérieure fine et semi-transparente */
+}
+
+/* Paragraphe dans le pied de page */
+.projects-footer p {
+    color: var(--color-muted-foreground); /* Couleur du texte (gris) */
+    font-size: 0.9rem; /* Taille de police de 0.9rem */
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+/* Tablette (md: 768px et plus) */
+@media (min-width: 768px) {
+    /* Titre principal sur tablette */
+    .hero-title {
+        font-size: 4.5rem; /* Taille de police augmentée à 4.5rem (équivalent à md:text-7xl) */
+    }
+    
+    /* Sous-titre sur tablette */
+    .hero-subtitle {
+        font-size: 1.875rem; /* Taille de police augmentée à 1.875rem (équivalent à md:text-3xl) */
+    }
+    
+    /* Description sur tablette */
+    .hero-description {
+        font-size: 1.25rem; /* Taille de police augmentée à 1.25rem (équivalent à md:text-xl) */
+    }
+    
+    /* Contenu hero sur tablette */
+    .hero-content {
+        padding: 5rem 1rem; /* Padding maintenu */
+    }
+    
+    /* Grille de projets sur tablette */
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr); /* Deux colonnes de largeur égale */
+        gap: 2.5rem; /* Espacement augmenté à 2.5rem */
+    }
+}
+
+/* Desktop (lg: 1024px et plus) */
+@media (min-width: 1024px) {
+    /* Contenu hero sur desktop */
+    .hero-content {
+        padding: 5rem 2rem; /* Padding horizontal augmenté à 2rem */
+    }
+    
+    /* Grille de projets sur desktop */
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr); /* Deux colonnes de largeur égale */
+        gap: 3rem; /* Espacement augmenté à 3rem */
+    }
+    
+    /* Image du projet sur desktop */
+    .project-image {
+        height: 300px; /* Hauteur augmentée à 300px */
+    }
+}
+
+/* Mobile (petits écrans) */
+@media (max-width: 640px) {
+    /* Titre principal sur mobile */
+    .hero-title {
+        font-size: 2.5rem; /* Taille de police réduite à 2.5rem */
+    }
+    
+    /* Sous-titre sur mobile */
+    .hero-subtitle {
+        font-size: 1.25rem; /* Taille de police réduite à 1.25rem */
+    }
+    
+    /* Description sur mobile */
+    .hero-description {
+        font-size: 1rem; /* Taille de police réduite à 1rem */
+        padding: 0 0.5rem; /* Padding horizontal de 0.5rem */
+    }
+    
+    /* Bouton hero sur mobile */
+    .btn-hero {
+        font-size: 1rem; /* Taille de police réduite à 1rem */
+        padding: 1.25rem 1.5rem; /* Padding réduit */
+    }
+    
+    /* Titre des projets sur mobile */
+    .projects-title {
+        font-size: 2rem; /* Taille de police réduite à 2rem */
+    }
+    
+    /* Grille de projets sur mobile */
+    .projects-grid {
+        grid-template-columns: 1fr; /* Une seule colonne */
+        gap: 1.5rem; /* Espacement réduit à 1.5rem */
+    }
+}
